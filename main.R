@@ -18,4 +18,4 @@ to.radians <- function(degrees){
 }
 set.seed(1)
 the.url <- "http://opendata.socrata.com/api/views/rxrh-4cxm/rows.csv?accessType=DOWNLOAD"
-all.airport.locs <- read.c
+all.airport.locs <- read.csv
