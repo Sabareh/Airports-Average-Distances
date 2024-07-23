@@ -12,3 +12,10 @@ haversine <- function(lat1, long1, lat2, long2, unit="km"){
   if(unit=="km") return(distance)
   if(unit=="miles") return(0.621371*distance)
 }
+
+to.radians <- function(degrees){
+  degrees * pi / 180
+}
+set.seed(1)
+the.url <- "http://opendata.socrata.com/api/views/rxrh-4cxm/rows.csv?accessType=DOWNLOAD"
+all.airport.locs <- read.c
