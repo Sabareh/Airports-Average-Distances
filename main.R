@@ -18,4 +18,28 @@ to.radians <- function(degrees){
 }
 set.seed(1)
 the.url <- "http://opendata.socrata.com/api/views/rxrh-4cxm/rows.csv?accessType=DOWNLOAD"
-all.airport.locs <- read.csv
+all.airport.locs <- read.csv(the.url, stringsAsFactors=FALSE)
+
+library(magrittr)
+library(assertr)
+
+CHECKS <- . %>%
+    verify(nrow(.) == 13429) %>%
+    verify(names(.) %in% c("locationID", "Latitude", "Longitude")) %>%
+    assert(within_bounds(0, 90), Latitude) %>% 
+    assert(within_bounds(0, 180), Longitude)
+all.airport.locs <- CHECKS(all.airport.locs)
+
+#starting off with 400 airports
+
+smp.size <- 400
+
+#choosing a random sample of airports
+
+random.sample <- sample((1:nrow(all.airport.locs)), smp.size)
+airports.locs <- all.airport.locs[random.sample, ]
+
+row.names(airports.locs) <- NULL
+haed(airports.locs)
+
+
